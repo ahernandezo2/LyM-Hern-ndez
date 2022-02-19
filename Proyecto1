@@ -1,20 +1,21 @@
 
-archivo = open("archivo.txt","r")
+archivo = open("archivo.txt","r")# abre el archivo para lectura, le puse archivo.txt porque no sé cómo se vaya a llamar
 contenido = archivo.read()# retorna todo el contenido del archivo como un String
 lista_contenido = contenido.split(",")# retorna el String anterior como una lista
 
 def validar_parentesis(lista_contenido):
     """
-    Esta función valida si los paréntesis del archivo son todos correspondidos
+    Esta función valida si los paréntesis del archivo son todos correspondidos, es decir,
+    si hay uno de cierre por cada uno de apertura.
     """
     contador_abrir = 0
     contador_cerrar = 0
 
-    for a in len(lista_contenido):
+    for a in lista_contenido:
         if a == "(":
             contador_abrir += 1
 
-    for c in len(lista_contenido):
+    for c in lista_contenido:
         if c == ")":
             contador_cerrar += 1
 
@@ -28,4 +29,3 @@ def validar_parentesis(lista_contenido):
 if rta == False:
     print("no")
 else:
-    
