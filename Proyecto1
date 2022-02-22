@@ -1,4 +1,3 @@
-
 import os
 
 archivos = os.listdir()
@@ -17,7 +16,7 @@ def cargar_archivos():
     return(parser_txt)
 
 basicos=["IF"]
-mov_basicos=["MOVE","RIGHT", "LEFT", "ROTATE", "LOOK","DROP","FREE","PICK", "POP","CHECK","BLOCKEDP","SKIP","TO","DEFUN"]
+mov_basicos=["move","right", "left", "rotate", "look","drop","free","pick", "pop","blockedp","skip","to","defun"]
 var=[]
 
 
@@ -42,7 +41,7 @@ def subtexto(texto):
             
             
 def move(texto):
-    if identificador(texto)== "MOVE":
+    if identificador(texto)== "move":
         x=texto[texto.index(identificador(texto)[-1])+2::]
         y= subtexto(x)
         try: 
@@ -53,7 +52,7 @@ def move(texto):
             return(False)
 
 def right(texto):
-    if identificador(texto)== "RIGHT":
+    if identificador(texto)== "right":
         x=texto[texto.index(identificador(texto)[-1])+2::]
         y= subtexto(x)
         try: 
@@ -64,7 +63,7 @@ def right(texto):
             return(False)
     
 def left(texto):
-    if identificador(texto)== "LEFT":
+    if identificador(texto)== "left":
         x=texto[texto.index(identificador(texto)[-1])+2::]
         y= subtexto(x)
         try: 
@@ -74,7 +73,7 @@ def left(texto):
         except:
             return(False)
 def rotate(texto):
-    if identificador(texto)== "ROTATE":
+    if identificador(texto)== "rotate":
         x=texto[texto.index(identificador(texto)[-1])+2::]
         y= subtexto(x)
         try: 
@@ -84,7 +83,7 @@ def rotate(texto):
         except:
             return(False)
 def look(texto):
-    if identificador(texto)== "LOOK":
+    if identificador(texto)== "look":
         x=texto[texto.index(identificador(texto)[-1])+2::]
         y= subtexto(x)
         if y == "N" or y == "S" or y== "W" or y== "E":
@@ -92,7 +91,7 @@ def look(texto):
         else: 
             return(False)
 def drop(texto):
-    if identificador(texto)== "DROP":
+    if identificador(texto)== "drop":
         x=texto[texto.index(identificador(texto)[-1])+2::]
         y= len(x)
         contador=0
@@ -107,7 +106,7 @@ def drop(texto):
             return(False)
 
 def free(texto):
-    if identificador(texto)== "FREE":
+    if identificador(texto)== "free":
         x=texto[texto.index(identificador(texto)[-1])+3::]
         y= len(x)
         contador=0
@@ -122,7 +121,7 @@ def free(texto):
             return(False)
         
 def pick(texto):
-    if identificador(texto)== "PICK":
+    if identificador(texto)== "pick":
         x=texto[texto.index(identificador(texto)[-1])+2::]
         y= len(x)
         contador=0
@@ -137,7 +136,7 @@ def pick(texto):
             return(False)
         
 def pop(texto):
-    if identificador(texto)== "POP":
+    if identificador(texto)== "pop":
         x=texto[texto.index(identificador(texto)[-1])+4::]
         y= len(x)
         contador=0
@@ -153,13 +152,13 @@ def pop(texto):
             return(False)
 
 def skip(texto):
-    if identificador(texto)== "SKIP":
+    if identificador(texto)== "skip":
         return(True)
     else:
         return(False)
     
 def defun(texto):
-    if identificador(texto)== "DEFUN":
+    if identificador(texto)== "defun":
         x=texto[texto.index(identificador(texto)[-1])+5::]
         for z in x:
             variables.append(x)
@@ -206,4 +205,4 @@ def parser():
     
 print("Binvenido al nalizador de código")
 
-parser() 
+parser()  
