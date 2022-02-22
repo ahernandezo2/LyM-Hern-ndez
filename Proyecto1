@@ -1,31 +1,209 @@
 
-archivo = open("archivo.txt","r")# abre el archivo para lectura, le puse archivo.txt porque no sé cómo se vaya a llamar
-contenido = archivo.read()# retorna todo el contenido del archivo como un String
-lista_contenido = contenido.split(",")# retorna el String anterior como una lista
+import os
 
-def validar_parentesis(lista_contenido):
-    """
-    Esta función valida si los paréntesis del archivo son todos correspondidos, es decir,
-    si hay uno de cierre por cada uno de apertura.
-    """
-    contador_abrir = 0
-    contador_cerrar = 0
+archivos = os.listdir()
 
-    for a in lista_contenido:
-        if a == "(":
-            contador_abrir += 1
+def cargar_archivos():
+    for i in archivos:
+        if "txt" in i:
+            archivo = i
+        
+    lectura = open(archivo)
 
-    for c in lista_contenido:
-        if c == ")":
-            contador_cerrar += 1
+    texto= ""
+    for x in lectura:
+        texto+= x
+        parser_txt= texto.split("\n")
+    return(parser_txt)
 
-    if contador_abrir == contador_cerrar:
-        rta = True
-    else:
-        rta = False
+basicos=["IF"]
+mov_basicos=["MOVE","RIGHT", "LEFT", "ROTATE", "LOOK","DROP","FREE","PICK", "POP","CHECK","BLOCKEDP","SKIP","TO","DEFUN"]
+var=[]
+
+
+
+
+
+
+def identificador(texto):
+    subtexto=""
+    for x in texto:
+        if x != " ":
+            subtexto += x
+            if subtexto in basicos or subtexto in mov_basicos:
+                return(subtexto)
+
+def subtexto(texto):
+    subtexto=""
+    for x in texto:
+        if x != " ":
+            subtexto+= x
+        return(subtexto)
+            
+            
+def move(texto):
+    if identificador(texto)== "MOVE":
+        x=texto[texto.index(identificador(texto)[-1])+2::]
+        y= subtexto(x)
+        try: 
+            z= int(y)*0
+            if z == 0:
+                return( True)
+        except:
+            return(False)
+
+def right(texto):
+    if identificador(texto)== "RIGHT":
+        x=texto[texto.index(identificador(texto)[-1])+2::]
+        y= subtexto(x)
+        try: 
+            z= int(y)*0
+            if z == 0:
+                return( True)
+        except:
+            return(False)
     
-    return rta
+def left(texto):
+    if identificador(texto)== "LEFT":
+        x=texto[texto.index(identificador(texto)[-1])+2::]
+        y= subtexto(x)
+        try: 
+            z= int(y)*0
+            if z == 0:
+                return( True)
+        except:
+            return(False)
+def rotate(texto):
+    if identificador(texto)== "ROTATE":
+        x=texto[texto.index(identificador(texto)[-1])+2::]
+        y= subtexto(x)
+        try: 
+            z= int(y)*0
+            if z == 0:
+                return( True)
+        except:
+            return(False)
+def look(texto):
+    if identificador(texto)== "LOOK":
+        x=texto[texto.index(identificador(texto)[-1])+2::]
+        y= subtexto(x)
+        if y == "N" or y == "S" or y== "W" or y== "E":
+            return(True)
+        else: 
+            return(False)
+def drop(texto):
+    if identificador(texto)== "DROP":
+        x=texto[texto.index(identificador(texto)[-1])+2::]
+        y= len(x)
+        contador=0
+        for z in x:
+            if z in variables:
+                contador+=1
+        if contador == 1 and y == 2:
+            return(True)
+        elif y == (contador*2)+(contador-1):
+            return(True)
+        else:
+            return(False)
 
-if rta == False:
-    print("no")
-else:
+def free(texto):
+    if identificador(texto)== "FREE":
+        x=texto[texto.index(identificador(texto)[-1])+3::]
+        y= len(x)
+        contador=0
+        for z in x:
+            if z in variables:
+                contador+=1
+        if contador == 1 and y == 2:
+            return(True)
+        elif y == (contador*2)+(contador-1):
+            return(True)
+        else:
+            return(False)
+        
+def pick(texto):
+    if identificador(texto)== "PICK":
+        x=texto[texto.index(identificador(texto)[-1])+2::]
+        y= len(x)
+        contador=0
+        for z in x:
+            if z in variables:
+                contador+=1
+        if contador == 1 and y == 2:
+            return(True)
+        elif y == (contador*2)+(contador-1):
+            return(True)
+        else:
+            return(False)
+        
+def pop(texto):
+    if identificador(texto)== "POP":
+        x=texto[texto.index(identificador(texto)[-1])+4::]
+        y= len(x)
+        contador=0
+        for z in x:
+            if z in variables:
+                contador+=1
+        if contador == 1 and y == 2:
+            return(True)
+        elif y == (contador*2)+(contador-1):
+            return(True)
+        
+        else:
+            return(False)
+
+def skip(texto):
+    if identificador(texto)== "SKIP":
+        return(True)
+    else:
+        return(False)
+    
+def defun(texto):
+    if identificador(texto)== "DEFUN":
+        x=texto[texto.index(identificador(texto)[-1])+5::]
+        for z in x:
+            variables.append(x)
+        return(True)
+    else:
+        return(False)
+    
+
+def parser():
+    parser_txt= cargar_archivos()
+    
+    len(parser_txt)
+    contador= 0
+    for x in parser_txt:
+        if move(x) == True:
+            contador+=1
+        elif right(x) == True:
+            contador+=1
+        elif left(x) == True:
+            contador+=1
+        elif rotate(x) == True:
+            contador+=1
+        elif look(x) == True:
+            contador+=1
+        elif drop(x) == True:
+            contador+=1
+        elif free(x) == True:
+            contador+=1
+        elif pick(x) == True:
+            contador+=1
+        elif pop(x) == True:
+            contador+=1
+        elif skip(x) == True:
+            contador+=1
+        elif defun(x) == True:
+            contador+=1
+     
+            
+    if contador== len(parser_txt):
+        print("El código no tiene errores")
+    else:
+        print("El código tiene errores")
+        
+    
+print("Binvenido al nalizador de código")
+
+parser() 
